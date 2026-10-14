@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUARDiane - A freedom wall no one spy</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #1e293b;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: 90%;
+            flex: 1;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #1e293b;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        button {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #1d4ed8;
+        }
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+        .post {
+            border: 1px solid #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            background: #fafafa;
+        }
+        .post-author {
+            font-weight: bold;
+            color: #2563eb;
+            margin-bottom: 5px;
+        }
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #e2e8f0;
+            font-size: 12px;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <h1>🛡️ GUARDiane</h1>
+        <nav>
+            <a onclick="showPage('feed')">Home</a>
+            <a onclick="showPage('profile')">Profile</a>
+            <a onclick="showPage('about')">About Us</a>
+            <a onclick="showPage('login')">Login</a>
+            <a onclick="showPage('signup')">Signup</a>
+        </nav>
+    </header>
+
+    <!-- Main Content Container -->
+    <div class="container">
+
+        <!-- 1. LOGIN PAGE -->
+        <div id="login" class="page">
+            <h2>Login to GUARDiane</h2>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="loginUser" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="loginPass" placeholder="Enter password">
+            </div>
+            <button onclick="handleLogin()">Login</button>
+        </div>
+
+        <!-- 2. SIGNUP PAGE -->
+        <div id="signup" class="page">
+            <h2>Create an Account</h2>
+            <div class="form-group">
+                <label>Choose Username</label>
+                <input type="text" id="signupUser" placeholder="Choose a username">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="signupPass" placeholder="Choose a password">
+            </div>
+            <button onclick="handleSignup()">Sign Up</button>
+        </div>
+
+        <!-- 3. MAIN FEED PAGE -->
+        <div id="feed" class="page active">
+            <h2>Main Feed (No AI Spying!)</h2>
+            <div class="form-group">
+                <textarea id="postContent" rows="3" placeholder="Share your thoughts privately..."></textarea>
+                <button onclick="createPost()" style="margin-top: 10px;">Post</button>
+            </div>
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+            <div id="postsContainer">
+                <!-- Posts will appear here dynamically -->
+                <div class="post">
+                    <div class="post-author">ayyyba(</div>
+                    <p>Welcome to GUARDiane! Here, your data stays on your device. No ad trackers, no AI spying! 🚀</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. USER PROFILE PAGE -->
+        <div id="profile" class="page">
+            <h2>User Profile</h2>
+            <p><strong>Username:</strong> <span id="profileName">GuestUser</span></p>
+            <p><strong>Bio:</strong> Privacy enthusiast and student builder.</p>
+            <br>
+            <button onclick="alert('Profile settings saved!')">Edit Profile</button>
+        </div>
+
+        <!-- 5. ABOUT US PAGE -->
+        <div id="about" class="page">
+            <h2>About GUARDiane</h2>
+            <p> GUARDiane is created because we believe everyone has the right to online privacy. Big tech companies use AI to watch everything you click, track what you do, and sell your personal information. GUARDiane keeps your data safe on your own device so you can share freely without being watched The name GUARDiane comes directly from creator Ivan Gadiane!
+
+It combines the word "GUARD" (representing security and privacy protection) with his last name "Gadiane" (GUARD + Gadiane = GUARDiane).. .</p>
+            <br>
+            <p><strong>Our Mission:</strong> To GUARD everyone using this social media prototyp. Where you can share freely without being whatch.</p>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>GUARDiane Prototype &copy; 2026 | Built for Privacy</p>
+    </footer>
+
+    <!-- Simple JavaScript for Navigation and Posts -->
+    <script>
+        // Simple function to switch between pages
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show the selected page
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        // Simple login simulation
+        function handleLogin() {
+            const user = document.getElementById('loginUser').value;
+            if(user) {
+                alert('Welcome back, ' + user + '!');
+                document.getElementById('profileName').innerText = user;
+                showPage('feed');
+            } else {
+                alert('Please enter your username.');
+            }
+        }
+
+        // Simple signup simulation
+        function handleSignup() {
+            const user = document.getElementById('signupUser').value;
+            if(user) {
+                alert('Account created successfully for ' + user + '!');
+                document.getElementById('profileName').innerText = user;
+                showPage('feed');
+            } else {
+                alert('Please choose a username.');
+            }
+        }
+
+        // Simple post creation function
+        function createPost() {
+            const content = document.getElementById('postContent').value;
+            if(content.trim() === '') {
+                alert('Post cannot be empty!');
+                return;
+            }
+
+            const currentUsername = document.getElementById('profileName').innerText;
+
+            // Create new post HTML element
+            const postDiv = document.createElement('div');
+            postDiv.className = 'post';
+            postDiv.innerHTML = `
+                <div class="post-author">${currentUsername}</div>
+                <p>${content}</p>
+            `;
+
+            // Add to the top of the feed container
+            const container = document.getElementById('postsContainer');
+            container.insertBefore(postDiv, container.firstChild);
+
+            // Clear text area
+            document.getElementById('postContent').value = '';
+        }
+    </script>
+</body>
+</html>
